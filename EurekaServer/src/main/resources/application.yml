@@ -1,0 +1,12 @@
+server:
+  port: 8761  # Default port for Eureka server. If you want to change this, you need to configure it in all the other microservices projects.
+
+eureka:
+  client:
+    fetch-registry: false  # Disable fetching the registry of other services from Eureka.
+                            # This is used when the service does not need to discover other services.
+    register-with-eureka: false  # Disable registering this service with the Eureka server.
+                                # This is typically used for services like the Eureka server itself or special services
+                                # that don't need to be discovered by other services.
+  server:
+    enable-self-preservation: false  # Disable self-preservation mode for testing. Discards expired instances.

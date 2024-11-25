@@ -1,0 +1,24 @@
+server:
+  port: 8084  # Port on which the API Gateway service will run
+
+spring:
+  application:
+    name: APIGATEWAY  # Naming the application for service discovery
+
+  cloud:
+    gateway:
+      routes:
+        # Route configuration for the Citizen Service
+        - id: CITIZENSERVICE  # Identifier for the Citizen Service route
+          uri: lb://CITIZENSERVICE  # Load-balanced URI for the Citizen Service
+          predicates:
+            - Path=/citizen/**  # Requests starting with '/citizen/' are routed to the Citizen Service
+
+        # Route configuration for the Vaccination Center Service
+        - id: VACCINATION-CENTER-SERVICE  # Identifier for the Vaccination Center Service route
+          uri: lb://VACCINATIONCENTER  # Load-balanced URI for the Vaccination Center Service
+          predicates:
+            - Path=/vaccination-center/**  # Matches the service endpoint
+
+  main:
+    web-application-type: reactive  # Enabling reactive web application type
